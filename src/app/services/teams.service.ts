@@ -27,14 +27,24 @@ export class TeamsService {
       conference: item.Conference,
       division: item.Division,
       wins: item.Wins,
-      losses: item.Losses
+      losses: item.Losses,
+      homeWins: item.HomeWins,
+      homeLosses: item.HomeLosses,
+      awayWins: item.AwayWins,
+      awayLosses: item.AwayLosses,
+      lastTenWins: item.LastTenWins,
+      lastTenLosses: item.LastTenLosses,
+      pointsPerGame: item.PointsPerGameFor,
+      pointsAllowed: item.PointsPerGameAgainst,
+      activeStreak: item.StreakDescription,
+      percentage: item.Percentage
     });
   }
 
   getTeams(): Observable<Team[]> {
     const apiParams = {
       responseType: 'JSON',
-      season: 2018
+      season: 2019
     };
     const url = `https://api.fantasydata.net/v3/nba/stats/${
       apiParams.responseType
