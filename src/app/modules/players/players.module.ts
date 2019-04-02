@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { PlayersRoutingModule } from './players-routing.module';
 import { PlayersComponent } from './pages/players/players.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [PlayersComponent],
-  imports: [
-    CommonModule,
-    PlayersRoutingModule
-  ]
+  imports: [CommonModule, PlayersRoutingModule, SharedModule]
 })
-export class PlayersModule { }
+export class PlayersModule {}

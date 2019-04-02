@@ -1,12 +1,18 @@
 <header class="header">
   <figure class="header__logo">
-    <a href="#"><img src="../../../assets/logo.png" alt="header-logo"></a>
+    <a routerLink="/home"><img src="../../../assets/logo.png" alt="header-logo" /></a>
   </figure>
   <nav>
     <ul class="header__nav">
-      <li class="header__nav__item"><a [routerLink]="['/conferences']">Conference Standings</a></li>
-      <li class="header__nav__item"><a routerLink="/divisions">Division Standings</a></li>
-      <li class="header__nav__item"><a routerLink="/players">Player Stats</a></li>
+      <li class="header__nav__item">
+        <a routerLink="/conferences">Conference Standings</a>
+      </li>
+      <li class="header__nav__item">
+        <a routerLink="/divisions">Division Standings</a>
+      </li>
+      <li class="header__nav__item">
+        <a routerLink="/players">Player Stats</a>
+      </li>
       <li class="header__nav__item"><a routerLink="/teams">Team Stats</a></li>
     </ul>
   </nav>
