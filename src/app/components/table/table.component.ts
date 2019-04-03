@@ -1,12 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+
+export interface TableColumn {
+  title: string;
+  key: string;
+}
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
-  constructor() {}
+export class TableComponent implements OnInit, OnChanges {
+  @Input()
+  dataSource: any[] = [];
+
+  @Input()
+  displayedColumns: TableColumn[] = [];
+
+  rows: any[] = [];
 
   ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+    if (changes.displayedColumns) {
+      console.log(changes.displayedColumns.currentValue);
+    }
+  }
 }

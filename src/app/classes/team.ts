@@ -5,10 +5,13 @@ export class Team {
   division: string;
   wins: number;
   losses: number;
+  home: string;
   homeWins: number;
   homeLosses: number;
+  away: string;
   awayWins: number;
   awayLosses: number;
+  lastTen: string;
   lastTenWins: number;
   lastTenLosses: number;
   pointsPerGame: number;
@@ -24,10 +27,13 @@ export class Team {
       division: value.division || null,
       wins: value.wins || null,
       losses: value.losses || null,
+      home: value.home || null,
       homeWins: value.homeWins || null,
       homeLosses: value.homeLosses || null,
+      away: value.away || null,
       awayWins: value.awayWins || null,
       awayLosses: value.awayLosses || null,
+      lastTen: value.lastTen || null,
       lastTenWins: value.lastTenWins || null,
       lastTenLosses: value.lastTenLosses || null,
       pointsPerGame: value.pointsPerGame || null,

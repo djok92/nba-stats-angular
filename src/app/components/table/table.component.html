@@ -1,1 +1,17 @@
-
+<table class=" results-table">
+  <thead class="table-header">
+    <tr>
+      <ng-container *ngFor="let column of displayedColumns">
+        <th>{{column.title}}</th>
+      </ng-container>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let data of dataSource">
+      <tr>
+        <td *ngFor="let column of displayedColumns">{{ data[column.key]}}
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
