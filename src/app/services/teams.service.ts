@@ -4,6 +4,7 @@ import { environment as env } from 'src/environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Team } from '../classes/team';
+import { TableColumn } from '../components/table/table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,49 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   private _teams$: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
+
+  tableColumns: TableColumn[] = [
+    {
+      key: 'name',
+      title: 'Name'
+    },
+    {
+      key: 'wins',
+      title: 'Wins'
+    },
+    {
+      key: 'losses',
+      title: 'Losses'
+    },
+    {
+      key: 'percentage',
+      title: 'Percentage'
+    },
+    {
+      key: 'home',
+      title: 'Home'
+    },
+    {
+      key: 'away',
+      title: 'Away'
+    },
+    {
+      key: 'lastTen',
+      title: 'Last Ten'
+    },
+    {
+      key: 'activeStreak',
+      title: 'Active Streak'
+    },
+    {
+      key: 'pointsPerGame',
+      title: 'PPG'
+    },
+    {
+      key: 'pointsAllowed',
+      title: 'PPG Allowed'
+    }
+  ];
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -64,5 +108,9 @@ export class TeamsService {
         this._teams$.next(res);
       });
     return this._teams$.asObservable();
+  }
+
+  getColumns(): TableColumn[] {
+    return this.tableColumns;
   }
 }

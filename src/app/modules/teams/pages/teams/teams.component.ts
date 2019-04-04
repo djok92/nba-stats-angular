@@ -12,48 +12,7 @@ export class TeamsComponent implements OnInit {
   constructor(private teamsService: TeamsService) {}
 
   teams: Team[] = [];
-  displayedColumns: TableColumn[] = [
-    {
-      key: 'name',
-      title: 'Name'
-    },
-    {
-      key: 'wins',
-      title: 'Wins'
-    },
-    {
-      key: 'losses',
-      title: 'Losses'
-    },
-    {
-      key: 'percentage',
-      title: 'Percentage'
-    },
-    {
-      key: 'home',
-      title: 'Home'
-    },
-    {
-      key: 'away',
-      title: 'Away'
-    },
-    {
-      key: 'lastTen',
-      title: 'Last Ten'
-    },
-    {
-      key: 'activeStreak',
-      title: 'Active Streak'
-    },
-    {
-      key: 'pointsPerGame',
-      title: 'PPG'
-    },
-    {
-      key: 'pointsAllowed',
-      title: 'PPG Allowed'
-    }
-  ];
+  displayedColumns: TableColumn[] = [];
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -61,5 +20,6 @@ export class TeamsComponent implements OnInit {
         a.percentage > b.percentage ? -1 : b.percentage > a.percentage ? 1 : 0
       );
     });
+    this.displayedColumns = this.teamsService.getColumns();
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamsService } from 'src/app/services/teams.service';
 import { Team } from 'src/app/classes/team';
 import { TableColumn } from 'src/app/components/table/table.component';
+import { Division } from 'src/app/enums';
 
 @Component({
   selector: 'app-divisions',
@@ -18,61 +19,36 @@ export class DivisionsComponent implements OnInit {
   pacificDivisionTeams: Team[] = [];
   southWestDivisionTeams: Team[] = [];
 
-  displayedColumns: TableColumn[] = [
-    {
-      key: 'name',
-      title: 'Name'
-    },
-    {
-      key: 'wins',
-      title: 'Wins'
-    },
-    {
-      key: 'losses',
-      title: 'Losses'
-    },
-    {
-      key: 'percentage',
-      title: 'Percentage'
-    },
-    {
-      key: 'home',
-      title: 'Home'
-    },
-    {
-      key: 'away',
-      title: 'Away'
-    },
-    {
-      key: 'lastTen',
-      title: 'Last Ten'
-    },
-    {
-      key: 'activeStreak',
-      title: 'Active Streak'
-    },
-    {
-      key: 'pointsPerGame',
-      title: 'PPG'
-    },
-    {
-      key: 'pointsAllowed',
-      title: 'PPG Allowed'
-    }
-  ];
+  displayedColumns: TableColumn[] = [];
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
-      this.atlanticDivisionTeams = this.sortByDivision(teams, 'Atlantic');
-      this.centralDivisionTeams = this.sortByDivision(teams, 'Central');
-      this.southEastDivisionTeams = this.sortByDivision(teams, 'Southeast');
-      this.northWestDivisionTeams = this.sortByDivision(teams, 'Northwest');
-      this.pacificDivisionTeams = this.sortByDivision(teams, 'Pacific');
-      this.southWestDivisionTeams = this.sortByDivision(teams, 'Southwest');
+      this.atlanticDivisionTeams = this.sortByDivision(
+        teams,
+        Division.Atlantic
+      );
+      this.centralDivisionTeams = this.sortByDivision(teams, Division.Central);
+      this.southEastDivisionTeams = this.sortByDivision(
+        teams,
+        Division.Southeast
+      );
+      this.northWestDivisionTeams = this.sortByDivision(
+        teams,
+        Division.Northwest
+      );
+      this.pacificDivisionTeams = this.sortByDivision(teams, Division.Pacific);
+      this.southWestDivisionTeams = this.sortByDivision(
+        teams,
+        Division.Southwest
+      );
     });
+    this.displayedColumns = this.teamsService.getColumns();
   }
 
-  private sortByDivision(arr: Team[], condition: string): Team[] {
-    return arr.filter((item: Team) => item.division === condition);
+  /**
+   * @returns Team[] Return the teams array sorted by the division
+   */
+  private sortByDivision(teams: Team[], division: string): Team[] {
+    return teams.filter((item: Team) => item.division === division);
   }
 }

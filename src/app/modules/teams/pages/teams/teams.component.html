@@ -1,8 +1,13 @@
 <div class="teams">
   <app-header></app-header>
   <div class="container">
-    <div class="col-lg-12 mt-5">
-      <app-table [dataSource]="teams" [displayedColumns]="displayedColumns"></app-table>
+    <div class="row">
+      <div class="col-lg-12 mt-5">
+        <div class="table-holder">
+          <h3>All Teams</h3>
+          <app-table [dataSource]="teams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -23,6 +23,7 @@ import { TableComponent } from '../components/table/table.component';
   ],
   exports: [
     HeaderComponent,
+    SearchFormComponent,
     RouterModule,
     HttpClientModule,
     MatTableModule,
