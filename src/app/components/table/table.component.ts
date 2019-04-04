@@ -16,7 +16,7 @@ export interface TableColumn {
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit {
   @Input()
   dataSource: any[] = [];
 
@@ -27,10 +27,10 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit() {}
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    if (changes.displayedColumns) {
-      console.log(changes.displayedColumns.currentValue);
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log(changes);
+  //   if (changes.displayedColumns) {
+  //     console.log(changes.displayedColumns.currentValue);
+  //   }
+  // }
 }

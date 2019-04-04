@@ -1,8 +1,33 @@
 <div class="divisions">
   <app-header></app-header>
   <div class="container">
-    <div class="col-lg-12">
-      <app-table></app-table>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="table-holder">
+          <h3>Atlantic Division</h3>
+          <app-table [dataSource]="atlanticDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+        <div class="table-holder">
+          <h3>Central Division</h3>
+          <app-table [dataSource]="centralDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+        <div class="table-holder">
+          <h3>Southeast Division</h3>
+          <app-table [dataSource]="southEastDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+        <div class="table-holder">
+          <h3>Northwest Division</h3>
+          <app-table [dataSource]="northWestDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+        <div class="table-holder">
+          <h3>Pacific Division</h3>
+          <app-table [dataSource]="pacificDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+        <div class="table-holder">
+          <h3>Southwest Division</h3>
+          <app-table [dataSource]="southWestDivisionTeams" [displayedColumns]="displayedColumns"></app-table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

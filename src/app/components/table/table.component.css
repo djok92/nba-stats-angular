@@ -1,8 +1,14 @@
 .results-table {
   width: 80%;
   margin: 20px auto;
+  text-align: center;
 }
 
-.full-width-table {
-  width: 100%;
+.results-table tbody tr td {
+  padding: 5px 0;
+}
+
+.results-table tr:first-of-type th:first-of-type,
+.results-table tr td:first-of-type {
+  text-align: left;
 }
