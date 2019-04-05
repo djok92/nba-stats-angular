@@ -3,13 +3,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <app-search-form></app-search-form>
+        <app-select [teams]="teams" (emitSelectValue)="getSelectValue($event)"></app-select>
+      </div>
+      <div class="col-lg-12">
+        <p *ngFor="let player of players">
+          {{ player.name }}
+        </p>
       </div>
       <!-- <div class="col-lg-12">
         <div class="table-holder">
           <app-table></app-table>
         </div>
       </div> -->
+      <!--OVDE STAO-->
     </div>
   </div>
 </div>

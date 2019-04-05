@@ -84,7 +84,8 @@ export class TeamsService {
       pointsPerGame: item.PointsPerGameFor,
       pointsAllowed: item.PointsPerGameAgainst,
       activeStreak: item.StreakDescription,
-      percentage: item.Percentage
+      percentage: item.Percentage,
+      abbreviation: item.Key
     });
   }
 
@@ -99,13 +100,13 @@ export class TeamsService {
     this.http
       .get(url, this.httpOptions)
       .pipe(
-        map((res: any) => {
-          const teams = res.map(this.mapTeam);
+        map((response: any) => {
+          const teams = response.map(this.mapTeam);
           return teams;
         })
       )
-      .subscribe((res: Team[]) => {
-        this._teams$.next(res);
+      .subscribe((teams: Team[]) => {
+        this._teams$.next(teams);
       });
     return this._teams$.asObservable();
   }

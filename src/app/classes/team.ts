@@ -19,6 +19,7 @@ export class Team {
   pointsAllowed: number;
   activeStreak: string;
   percentage: number;
+  abbreviation: string;
 
   constructor(value: any = {}) {
     Object.assign(this, {
@@ -40,7 +41,8 @@ export class Team {
       pointsPerGame: value.pointsPerGame || null,
       pointsAllowed: value.pointsAllowed || null,
       activeStreak: value.activeStreak || null,
-      percentage: value.percentage || null
+      percentage: value.percentage || null,
+      abbreviation: value.abbreviation || null
     });
   }
 }
