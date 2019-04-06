@@ -3,26 +3,30 @@ import { TeamsService } from 'src/app/services/teams.service';
 import { Team } from 'src/app/classes/team';
 import { PlayersService } from 'src/app/services/players.service';
 import { Player } from 'src/app/classes';
+import { TableColumn } from 'src/app/components/table/table.component';
 
 @Component({
-  selector: 'app-players',
-  templateUrl: './players.component.html',
-  styleUrls: ['./players.component.scss']
+  selector: 'app-players-list',
+  templateUrl: './players-list.component.html',
+  styleUrls: ['./players-list.component.scss']
 })
-export class PlayersComponent implements OnInit {
+export class PlayersListComponent implements OnInit {
+
   constructor(
     private teamsService: TeamsService,
     private playerService: PlayersService
-  ) {}
+  ) { }
 
   teams: Team[] = [];
   players: Player[] = [];
   selectedTeam: any = null;
+  displayedColumns: TableColumn[] = [];
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
       this.teams = teams;
     });
+    this.displayedColumns = this.playerService.getColumns();
   }
 
   getSelectValue(event) {
@@ -31,6 +35,8 @@ export class PlayersComponent implements OnInit {
       .getPlayersFromTeam(this.selectedTeam)
       .subscribe((players: Player[]) => {
         this.players = players;
+        console.log(this.players);
       });
   }
+
 }
