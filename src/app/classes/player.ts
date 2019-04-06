@@ -8,6 +8,7 @@ export class Player {
   weight: string;
   experience: number;
   jerseyNumber: number;
+  stats: object;
 
   constructor(value: any = {}) {
     Object.assign(this, {
@@ -19,7 +20,8 @@ export class Player {
       height: value.height || null,
       weight: value.weight || null,
       experience: value.experience || null,
-      jerseyNumber: value.jerseyNumber || null
+      jerseyNumber: value.jerseyNumber || null,
+      stats: value.stats || null,
     });
   }
 }
