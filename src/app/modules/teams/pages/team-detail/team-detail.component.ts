@@ -23,7 +23,6 @@ export class TeamDetailComponent implements OnInit {
       const id = params.id;
       this.teamsService.getTeam(id).subscribe((team: Team) => {
         this.teamData = team;
-        console.log("executed component")
       }); 
     })
   } 

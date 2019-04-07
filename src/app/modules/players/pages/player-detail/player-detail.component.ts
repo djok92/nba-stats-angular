@@ -23,6 +23,7 @@ export class PlayerDetailComponent implements OnInit {
       const id = params.id;
       this.playersSerivce.getPlayerFromTeam(id).subscribe((playerData: Player) => {
         this.playerData = playerData;
+        console.log(this.playerData);
       })
     })
   }

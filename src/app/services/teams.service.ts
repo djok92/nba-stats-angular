@@ -74,7 +74,6 @@ export class TeamsService {
   }
 
   getTeam(id): Observable<Team> {
-    console.log("executed service 1")
     const apiParams = {
       responseType: 'JSON',
       selectedTeam: id,
@@ -84,10 +83,8 @@ export class TeamsService {
     this.http.get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          console.log("executed service 2")
           const team = response.filter((item: any) => item.Team === id).map(this.mapTeamStats);
-          console.log("executed service 3")
-          return team
+          return team[0]
         })
       )
       .subscribe((team: Team) => {
@@ -136,8 +133,8 @@ export class TeamsService {
       name: item.Name,
       wins: item.Wins,
       losses: item.Losses,
-      pointsPerGame: (item.Points / item.Games).toFixed(1),
       stats: {
+        pointsPerGame: (item.Points / item.Games).toFixed(1),
         reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
         assistsPerGame: (item.Assists / item.Games).toFixed(1),
         stealsPerGame: (item.Steals / item.Games).toFixed(1),

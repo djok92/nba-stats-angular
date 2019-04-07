@@ -2,12 +2,12 @@
   <app-header></app-header>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-xs-12" *ngIf="teamData">
         <app-card-team
           [title]="teamData.name"
           [wins]="teamData.wins"
           [losses]="teamData.losses"
-          [pointsPerGame]="teamData.pointsPerGame"
+          [pointsPerGame]="teamData.stats.pointsPerGame"
           [reboundsPerGame]="teamData.stats.reboundsPerGame"
           [assistsPerGame]="teamData.stats.assistsPerGame"
           [stealsPerGame]="teamData.stats.stealsPerGame"
