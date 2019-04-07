@@ -13,6 +13,7 @@ export class TeamsComponent implements OnInit {
 
   teams: Team[] = [];
   displayedColumns: TableColumn[] = [];
+  entityRoute: string = 'teams';
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -20,6 +21,6 @@ export class TeamsComponent implements OnInit {
         a.percentage > b.percentage ? -1 : b.percentage > a.percentage ? 1 : 0
       );
     });
-    this.displayedColumns = this.teamsService.getColumns();
+    this.displayedColumns = this.teamsService.getTableColumns();
   }
 }

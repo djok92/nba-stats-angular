@@ -1,0 +1,19 @@
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="../../../assets/logo.png" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ title }}</h5>
+    <h5 class="card-title">{{ wins }} - {{ losses }}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"> PPG- {{ pointsPerGame }}</li>
+    <li class="list-group-item"> Rebounds per game - {{ reboundsPerGame }}</li>
+    <li class="list-group-item"> Assists per game - {{ assistsPerGame }}</li>
+    <li class="list-group-item"> Steals per game - {{ stealsPerGame }}</li>
+    <li class="list-group-item"> Turnovers per game - {{ turnoversPerGame }}</li>
+    <li class="list-group-item"> 3P Made per game - {{ threePointersPerGame }}</li>
+    <li class="list-group-item"> 3P % - {{ threePointersPercentage }}</li>
+    <li class="list-group-item"> 2P Made per game - {{ twoPointersPerGame }}</li>
+    <li class="list-group-item"> 2P % - {{ twoPointersPercentage }}</li>
+    <li class="list-group-item"> +/- - {{ plusMinus }}</li>
+  </ul>
+</div>

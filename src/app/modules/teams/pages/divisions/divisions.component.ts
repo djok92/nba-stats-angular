@@ -43,7 +43,7 @@ export class DivisionsComponent implements OnInit {
         Division.Southwest
       );
     });
-    this.displayedColumns = this.teamsService.getColumns();
+    this.displayedColumns = this.teamsService.getTableColumns();
   }
 
   /**

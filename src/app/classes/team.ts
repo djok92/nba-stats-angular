@@ -15,11 +15,10 @@ export class Team {
   lastTen: string;
   lastTenWins: number;
   lastTenLosses: number;
-  pointsPerGame: number;
-  pointsAllowed: number;
   activeStreak: string;
   percentage: number;
   abbreviation: string;
+  stats: object;
 
   constructor(value: any = {}) {
     Object.assign(this, {
@@ -39,11 +38,10 @@ export class Team {
       lastTen: value.lastTen || null,
       lastTenWins: value.lastTenWins || null,
       lastTenLosses: value.lastTenLosses || null,
-      pointsPerGame: value.pointsPerGame || null,
-      pointsAllowed: value.pointsAllowed || null,
       activeStreak: value.activeStreak || null,
       percentage: value.percentage || null,
-      abbreviation: value.abbreviation || null
+      abbreviation: value.abbreviation || null,
+      stats: value.stats || null,
     });
   }
 }

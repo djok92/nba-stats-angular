@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-card',
-  templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss']
+  selector: 'app-card-player',
+  templateUrl: './card-player.component.html',
+  styleUrls: ['./card-player.component.scss']
 })
-export class CardComponent implements OnInit {
+export class CardPlayerComponent implements OnInit {
 
   constructor() { }
 
@@ -22,7 +22,6 @@ export class CardComponent implements OnInit {
   @Input() fieldGoalsPercentage: string;
   @Input() freeThrowsPercentage: string;
   @Input() threePointersPercentage: string;
-
 
   ngOnInit() {
   }

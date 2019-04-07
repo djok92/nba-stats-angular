@@ -13,9 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from '../components/header/header.component';
 import { TableComponent } from '../components/table/table.component';
 import { SelectComponent } from '../components/select/select.component';
-import { CardComponent } from '../components/card/card.component';
 @NgModule({
-  declarations: [HeaderComponent, TableComponent, SelectComponent, CardComponent],
+  declarations: [HeaderComponent, TableComponent, SelectComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -31,7 +30,6 @@ import { CardComponent } from '../components/card/card.component';
     HeaderComponent,
     TableComponent,
     SelectComponent,
-    CardComponent,
     RouterModule,
     HttpClientModule,
     FormsModule,

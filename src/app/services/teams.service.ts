@@ -13,8 +13,9 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   private _teams$: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
+  private _team$: BehaviorSubject<Team> = new BehaviorSubject<Team>(null);
 
-  tableColumns: TableColumn[] = [
+  TableColumns: TableColumn[] = [
     {
       key: 'name',
       title: 'Name'
@@ -46,49 +47,8 @@ export class TeamsService {
     {
       key: 'activeStreak',
       title: 'Active Streak'
-    },
-    {
-      key: 'pointsPerGame',
-      title: 'PPG'
-    },
-    {
-      key: 'pointsAllowed',
-      title: 'PPG Allowed'
     }
   ];
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'aplication/json',
-      'Ocp-Apim-Subscription-Key': env.fantasyDataApiKey
-    })
-  };
-
-  private mapTeam(item: any): Team {
-    return new Team({
-      id: item.GlobalTeamID,
-      name: item.Name,
-      city: item.City,
-      conference: item.Conference,
-      division: item.Division,
-      wins: item.Wins,
-      losses: item.Losses,
-      homeWins: item.HomeWins,
-      homeLosses: item.HomeLosses,
-      home: `${item.HomeWins} - ${item.HomeLosses}`,
-      awayWins: item.AwayWins,
-      awayLosses: item.AwayLosses,
-      away: `${item.AwayWins} - ${item.AwayLosses}`,
-      lastTenWins: item.LastTenWins,
-      lastTenLosses: item.LastTenLosses,
-      lastTen: `${item.LastTenWins} - ${item.LastTenLosses}`,
-      pointsPerGame: item.PointsPerGameFor,
-      pointsAllowed: item.PointsPerGameAgainst,
-      activeStreak: item.StreakDescription,
-      percentage: item.Percentage,
-      abbreviation: item.Key
-    });
-  }
 
   getTeams(): Observable<Team[]> {
     const apiParams = {
@@ -113,7 +73,82 @@ export class TeamsService {
     return this._teams$.asObservable();
   }
 
-  getColumns(): TableColumn[] {
-    return this.tableColumns;
+  getTeam(id): Observable<Team> {
+    console.log("executed service 1")
+    const apiParams = {
+      responseType: 'JSON',
+      selectedTeam: id,
+      season: 2019
+    };
+    const url = `https://api.fantasydata.net/v3/nba/stats/${apiParams.responseType}/TeamSeasonStats/${apiParams.season}`;
+    this.http.get(url, this.httpOptions)
+      .pipe(
+        map((response: any) => {
+          console.log("executed service 2")
+          const team = response.filter((item: any) => item.Team === id).map(this.mapTeamStats);
+          console.log("executed service 3")
+          return team
+        })
+      )
+      .subscribe((team: Team) => {
+        this._team$.next(team);
+      })
+    return this._team$.asObservable();
   }
+
+  getTableColumns(): TableColumn[] {
+    return this.TableColumns;
+  }
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'aplication/json',
+      'Ocp-Apim-Subscription-Key': env.fantasyDataApiKey
+    })
+  };
+
+  private mapTeam(item: any): Team {
+    return new Team({
+      id: item.Key,
+      name: item.Name,
+      city: item.City,
+      conference: item.Conference,
+      division: item.Division,
+      wins: item.Wins,
+      losses: item.Losses,
+      homeWins: item.HomeWins,
+      homeLosses: item.HomeLosses,
+      home: `${item.HomeWins} - ${item.HomeLosses}`,
+      awayWins: item.AwayWins,
+      awayLosses: item.AwayLosses,
+      away: `${item.AwayWins} - ${item.AwayLosses}`,
+      lastTenWins: item.LastTenWins,
+      lastTenLosses: item.LastTenLosses,
+      lastTen: `${item.LastTenWins} - ${item.LastTenLosses}`,
+      activeStreak: item.StreakDescription,
+      percentage: item.Percentage,
+      abbreviation: item.Key
+    });
+  }
+
+  private mapTeamStats(item: any): Team {
+    return new Team({
+      name: item.Name,
+      wins: item.Wins,
+      losses: item.Losses,
+      pointsPerGame: (item.Points / item.Games).toFixed(1),
+      stats: {
+        reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
+        assistsPerGame: (item.Assists / item.Games).toFixed(1),
+        stealsPerGame: (item.Steals / item.Games).toFixed(1),
+        turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
+        threePointersPerGame: (item.ThreePointersMade / item.Games).toFixed(1),
+        threePointersPercentage: item.ThreePointersPercentage + " %",
+        twoPointersPerGame: (item.TwoPointersMade / item.Games).toFixed(1),
+        twoPointersPercentage: item.TwoPointersPercentage + " %",
+        plusMinus: item.PlusMinus
+      }
+    })
+  }
+
 }
