@@ -90,11 +90,11 @@ export class PlayersService {
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          return new Player({
-            stats: response
-          })
+          console.log(response);
+          const player = this.mapPlayerStats(response);
+          return player
         })
-      ).subscribe((player: any) => {
+      ).subscribe((player: Player) => {
         this._player$.next(player);
       });
     return this._player$.asObservable();
@@ -119,6 +119,27 @@ export class PlayersService {
       jerseyNumber: item.Jersey > 0 ? item.Jersey : `0`
     });
   }
+
+  private mapPlayerStats(item: any): Player {
+    return new Player({
+      name: item.Name,
+      position: item.Position,
+      stats: {
+        gamesPlayed: item.Games,
+        gamesStarted: item.Started,
+        pointsPerGame: (item.Points / item.Games).toFixed(1),
+        assistsPerGame: (item.Assists / item.Games).toFixed(1),
+        reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
+        stealsPerGame: (item.Steals / item.Games).toFixed(1),
+        blocksPerGame: (item.BlockedShots / item.Games).toFixed(1),
+        turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
+        fieldGoalsPercentage: `${item.FieldGoalsPercentage} %`,
+        freeThrowsPercentage: `${item.FreeThrowsPercentage} %`,
+        threePointersPercentage: `${item.ThreePointersPercentage} %,`
+      }
+    })
+  }
+
   private setPlayers(players: Player[]) {
     this._players$.next(players);
   }

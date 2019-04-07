@@ -22,7 +22,7 @@ export class PlayerDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const id = params.id;
       this.playersSerivce.getPlayerFromTeam(id).subscribe((playerData: Player) => {
-        this.playerData = playerData.stats;
+        this.playerData = playerData;
         console.log(this.playerData)
       })
     })
