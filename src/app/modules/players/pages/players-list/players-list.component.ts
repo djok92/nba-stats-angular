@@ -21,6 +21,7 @@ export class PlayersListComponent implements OnInit {
   players: Player[] = [];
   selectedTeam: any = null;
   displayedColumns: TableColumn[] = [];
+  entityRoute: string = 'players';
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -35,7 +36,6 @@ export class PlayersListComponent implements OnInit {
       .getPlayersFromTeam(this.selectedTeam)
       .subscribe((players: Player[]) => {
         this.players = players;
-        console.log(this.players);
       });
   }
 

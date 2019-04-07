@@ -66,6 +66,7 @@ export class TeamsService {
 
   private mapTeam(item: any): Team {
     return new Team({
+      id: item.GlobalTeamID,
       name: item.Name,
       city: item.City,
       conference: item.Conference,

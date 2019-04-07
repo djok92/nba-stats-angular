@@ -13,6 +13,7 @@ export class ConferencesComponent implements OnInit {
   easternConferenceTeams: Team[] = [];
   westernConferenceTeams: Team[] = [];
   displayedColumns: TableColumn[] = [];
+  entityRoute: string = 'teams';
 
   constructor(private teamsService: TeamsService) {}
 

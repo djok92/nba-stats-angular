@@ -17,8 +17,8 @@ export interface TableColumn {
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  // @Input()
-  // entityRoute: string;
+  @Input()
+  entityRoute: string;
 
   @Input()
   dataSource: any[] = [];

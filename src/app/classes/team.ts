@@ -23,6 +23,7 @@ export class Team {
 
   constructor(value: any = {}) {
     Object.assign(this, {
+      id: value.id || null,
       name: value.name || null,
       city: value.city || null,
       conference: value.conference || null,
