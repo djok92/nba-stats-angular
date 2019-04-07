@@ -3,27 +3,27 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="atlanticDivisionTeams.length > 0">
           <h3>Atlantic Division</h3>
           <app-table [dataSource]="atlanticDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="centralDivisionTeams.length > 0">
           <h3>Central Division</h3>
           <app-table [dataSource]="centralDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="southEastDivisionTeams.length > 0">
           <h3>Southeast Division</h3>
           <app-table [dataSource]="southEastDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="northWestDivisionTeams.length > 0">
           <h3>Northwest Division</h3>
           <app-table [dataSource]="northWestDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="pacificDivisionTeams.length > 0">
           <h3>Pacific Division</h3>
           <app-table [dataSource]="pacificDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="southWestDivisionTeams.length > 0">
           <h3>Southwest Division</h3>
           <app-table [dataSource]="southWestDivisionTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>

@@ -102,7 +102,8 @@ export class TeamsService {
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          const teams = response.map(this.mapTeam);
+          const teams = response.map(this.mapTeam)
+                                .sort((a , b) => b.wins - a.wins );
           return teams;
         })
       )

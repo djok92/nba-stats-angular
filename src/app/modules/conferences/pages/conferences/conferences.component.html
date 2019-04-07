@@ -3,11 +3,11 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="easternConferenceTeams.length > 0">
           <h1>Eastern Conference</h1>
           <app-table [dataSource]="easternConferenceTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
-        <div class="table-holder">
+        <div class="table-holder" *ngIf="westernConferenceTeams.length > 0">
           <h1>Western Conference</h1>
           <app-table [dataSource]="westernConferenceTeams" [displayedColumns]="displayedColumns" [entityRoute]="entityRoute"></app-table>
         </div>
