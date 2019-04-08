@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PlayersService } from 'src/app/services/players.service';
-import { Player } from 'src/app/classes';
+import { Player, PlayerStats } from 'src/app/classes';
 
 @Component({
   selector: 'app-player-detail',
@@ -14,7 +14,7 @@ export class PlayerDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private playersSerivce: PlayersService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.showPlayer();
@@ -24,8 +24,8 @@ export class PlayerDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       const id = params.id;
       this.playersSerivce
-        .getPlayerFromTeam(id)
-        .subscribe((playerData: Player) => {
+        .getPlayerStats(id)
+        .subscribe((playerData: PlayerStats) => {
           this.playerData = playerData;
         });
     });

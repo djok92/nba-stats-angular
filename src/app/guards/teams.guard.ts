@@ -8,13 +8,13 @@ import {
 import { Observable, ReplaySubject } from 'rxjs';
 import { CanActivate } from '@angular/router';
 import { TeamsService } from '../services/teams.service';
-import { Team } from '../classes';
+import { Team, TeamStats } from '../classes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsGuard implements CanActivate {
-  constructor(private router: Router, private teamsService: TeamsService) {}
+  constructor(private router: Router, private teamsService: TeamsService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,7 +23,7 @@ export class TeamsGuard implements CanActivate {
     const canActivate$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     const id = route.params.id;
 
-    this.teamsService.getTeam(id).subscribe((team: Team) => {
+    this.teamsService.getTeamStats(id).subscribe((team: TeamStats) => {
       if (team !== null) {
         canActivate$.next(true);
       } else {

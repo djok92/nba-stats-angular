@@ -7,14 +7,14 @@ import {
 } from '@angular/router';
 import { Observable, ReplaySubject } from 'rxjs';
 import { CanActivate } from '@angular/router';
-import { Player } from '../classes';
+import { PlayerStats } from '../classes';
 import { PlayersService } from '../services/players.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersGuard implements CanActivate {
-  constructor(private router: Router, private playersService: PlayersService) {}
+  constructor(private router: Router, private playersService: PlayersService) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,7 +23,7 @@ export class PlayersGuard implements CanActivate {
     const canActivate$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
     const id = route.params.id;
 
-    this.playersService.getPlayerFromTeam(id).subscribe((player: Player) => {
+    this.playersService.getPlayerStats(id).subscribe((player: PlayerStats) => {
       if (player !== null) {
         canActivate$.next(true);
       } else {

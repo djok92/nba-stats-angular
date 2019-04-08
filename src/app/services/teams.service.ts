@@ -5,12 +5,13 @@ import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Team } from '../classes/team';
 import { TableColumn } from '../components/table/table.component';
+import { TeamStats } from '../classes';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeamsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private _teams$: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
 
@@ -63,7 +64,7 @@ export class TeamsService {
     };
     const url = `https://api.fantasydata.net/v3/nba/stats/${
       apiParams.responseType
-    }/Standings/${apiParams.season}`;
+      }/Standings/${apiParams.season}`;
     this.http
       .get(url, this.httpOptions)
       .pipe(
@@ -80,8 +81,8 @@ export class TeamsService {
     return this._teams$.asObservable();
   }
 
-  getTeam(id): Observable<Team> {
-    const team$: ReplaySubject<Team> = new ReplaySubject<Team>(1);
+  getTeamStats(id): Observable<TeamStats> {
+    const team$: ReplaySubject<TeamStats> = new ReplaySubject<TeamStats>(1);
 
     const apiParams = {
       responseType: 'JSON',
@@ -90,7 +91,7 @@ export class TeamsService {
     };
     const url = `https://api.fantasydata.net/v3/nba/stats/${
       apiParams.responseType
-    }/TeamSeasonStats/${apiParams.season}`;
+      }/TeamSeasonStats/${apiParams.season}`;
     this.http
       .get(url, this.httpOptions)
       .pipe(
@@ -98,11 +99,12 @@ export class TeamsService {
           const team = response
             .map(this.mapTeamStats)
             .find((item: any) => item.id === id);
+          console.log(team);
           return team;
         })
       )
       .subscribe(
-        (team: Team) => {
+        (team: TeamStats) => {
           team$.next(team);
         },
         error => {
@@ -140,24 +142,22 @@ export class TeamsService {
     });
   }
 
-  private mapTeamStats(item: any): Team {
-    return new Team({
+  private mapTeamStats(item: any): TeamStats {
+    return new TeamStats({
       id: item.Team,
       name: item.Name,
       wins: item.Wins,
       losses: item.Losses,
-      stats: {
-        pointsPerGame: (item.Points / item.Games).toFixed(1),
-        reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
-        assistsPerGame: (item.Assists / item.Games).toFixed(1),
-        stealsPerGame: (item.Steals / item.Games).toFixed(1),
-        turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
-        threePointersPerGame: (item.ThreePointersMade / item.Games).toFixed(1),
-        threePointersPercentage: item.ThreePointersPercentage + ' %',
-        twoPointersPerGame: (item.TwoPointersMade / item.Games).toFixed(1),
-        twoPointersPercentage: item.TwoPointersPercentage + ' %',
-        plusMinus: item.PlusMinus
-      }
+      pointsPerGame: (item.Points / item.Games).toFixed(1),
+      reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
+      assistsPerGame: (item.Assists / item.Games).toFixed(1),
+      stealsPerGame: (item.Steals / item.Games).toFixed(1),
+      turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
+      threePointersPerGame: (item.ThreePointersMade / item.Games).toFixed(1),
+      threePointersPercentage: item.ThreePointersPercentage + ' %',
+      twoPointersPerGame: (item.TwoPointersMade / item.Games).toFixed(1),
+      twoPointersPercentage: item.TwoPointersPercentage + ' %',
+      plusMinus: item.PlusMinus
     });
   }
 }

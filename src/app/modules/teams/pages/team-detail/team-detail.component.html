@@ -4,13 +4,12 @@
     <div class="row">
       <div class="col-xs-12" *ngIf="teamData">
         <app-card-team [title]="teamData.name" [wins]="teamData.wins" [losses]="teamData.losses"
-          [pointsPerGame]="teamData.stats.pointsPerGame" [reboundsPerGame]="teamData.stats.reboundsPerGame"
-          [assistsPerGame]="teamData.stats.assistsPerGame" [stealsPerGame]="teamData.stats.stealsPerGame"
-          [turnoversPerGame]="teamData.stats.turnoversPerGame"
-          [threePointersPerGame]="teamData.stats.threePointersPerGame"
-          [threePointersPercentage]="teamData.stats.threePointersPercentage"
-          [twoPointersPerGame]="teamData.stats.twoPointersPerGame"
-          [twoPointersPercentage]="teamData.stats.twoPointersPercentage" [plusMinus]="teamData.stats.plusMinus">
+          [pointsPerGame]="teamData.pointsPerGame" [reboundsPerGame]="teamData.reboundsPerGame"
+          [assistsPerGame]="teamData.assistsPerGame" [stealsPerGame]="teamData.stealsPerGame"
+          [turnoversPerGame]="teamData.turnoversPerGame" [threePointersPerGame]="teamData.threePointersPerGame"
+          [threePointersPercentage]="teamData.threePointersPercentage"
+          [twoPointersPerGame]="teamData.twoPointersPerGame" [twoPointersPercentage]="teamData.twoPointersPercentage"
+          [plusMinus]="teamData.plusMinus">
         </app-card-team>
       </div>
     </div>

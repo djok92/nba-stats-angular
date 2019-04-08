@@ -1,4 +1,4 @@
 export { Player } from './player';
-export { PlayerStat } from './playerStat';
+export { PlayerStats } from './player-stats';
 export { Team } from './team';
-export { TeamStat } from './teamStat';
+export { TeamStats } from './team-stats';

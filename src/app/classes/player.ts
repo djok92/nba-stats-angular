@@ -8,7 +8,6 @@ export class Player {
   weight: string;
   experience: number;
   jerseyNumber: number;
-  stats: object;
   position: string;
 
   constructor(value: any = {}) {
@@ -23,7 +22,6 @@ export class Player {
       experience: value.experience || null,
       jerseyNumber: value.jerseyNumber || null,
       position: value.position || null,
-      stats: value.stats || null
     });
   }
 }

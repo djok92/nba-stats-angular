@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
-import { Team, Player } from '../classes';
+import { Team, Player, PlayerStats } from '../classes';
 import { pipe, BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableColumn } from '../components/table/table.component';
@@ -10,7 +10,7 @@ import { TableColumn } from '../components/table/table.component';
   providedIn: 'root'
 })
 export class PlayersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private _players$: BehaviorSubject<Player[]> = new BehaviorSubject<Player[]>(
     []
@@ -61,7 +61,7 @@ export class PlayersService {
     };
     const url = `https://api.fantasydata.net/v3/nba/stats/${
       apiParams.responseType
-    }/Players/${apiParams.selectedTeam}`;
+      }/Players/${apiParams.selectedTeam}`;
     this.http
       .get(url, this.httpOptions)
       .pipe(
@@ -77,8 +77,8 @@ export class PlayersService {
     return this._players$.asObservable();
   }
 
-  getPlayerFromTeam(id): Observable<Player> {
-    const player$: ReplaySubject<Player> = new ReplaySubject<Player>(1);
+  getPlayerStats(id): Observable<PlayerStats> {
+    const player$: ReplaySubject<PlayerStats> = new ReplaySubject<PlayerStats>(1);
 
     const apiParams = {
       responseType: 'JSON',
@@ -88,19 +88,20 @@ export class PlayersService {
 
     const url = `https://api.fantasydata.net/v3/nba/stats/${
       apiParams.responseType
-    }/PlayerSeasonStatsByPlayer/${apiParams.season}/${
+      }/PlayerSeasonStatsByPlayer/${apiParams.season}/${
       apiParams.selectedPlayer
-    }`;
+      }`;
     this.http
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
           const player = this.mapPlayerStats(response);
+          console.log(player);
           return player;
         })
       )
       .subscribe(
-        (player: Player) => {
+        (player: PlayerStats) => {
           player$.next(player);
         },
         error => {
@@ -130,23 +131,21 @@ export class PlayersService {
     });
   }
 
-  private mapPlayerStats(item: any): Player {
-    return new Player({
+  private mapPlayerStats(item: any): PlayerStats {
+    return new PlayerStats({
       name: item.Name,
       position: item.Position,
-      stats: {
-        gamesPlayed: item.Games,
-        gamesStarted: item.Started,
-        pointsPerGame: (item.Points / item.Games).toFixed(1),
-        assistsPerGame: (item.Assists / item.Games).toFixed(1),
-        reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
-        stealsPerGame: (item.Steals / item.Games).toFixed(1),
-        blocksPerGame: (item.BlockedShots / item.Games).toFixed(1),
-        turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
-        fieldGoalsPercentage: `${item.FieldGoalsPercentage} %`,
-        freeThrowsPercentage: `${item.FreeThrowsPercentage} %`,
-        threePointersPercentage: `${item.ThreePointersPercentage} %`
-      }
+      gamesPlayed: item.Games,
+      gamesStarted: item.Started,
+      pointsPerGame: (item.Points / item.Games).toFixed(1),
+      assistsPerGame: (item.Assists / item.Games).toFixed(1),
+      reboundsPerGame: (item.Rebounds / item.Games).toFixed(1),
+      stealsPerGame: (item.Steals / item.Games).toFixed(1),
+      blocksPerGame: (item.BlockedShots / item.Games).toFixed(1),
+      turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
+      fieldGoalsPercentage: `${item.FieldGoalsPercentage} %`,
+      freeThrowsPercentage: `${item.FreeThrowsPercentage} %`,
+      threePointersPercentage: `${item.ThreePointersPercentage} %`
     });
   }
 
