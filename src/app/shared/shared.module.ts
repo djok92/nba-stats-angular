@@ -14,12 +14,14 @@ import { HeaderComponent } from '../components/header/header.component';
 import { TableComponent } from '../components/table/table.component';
 import { SelectComponent } from '../components/select/select.component';
 import { HeaderLogoutComponent } from '../components/header-logout/header-logout.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
 @NgModule({
   declarations: [
     HeaderComponent,
     TableComponent,
     SelectComponent,
-    HeaderLogoutComponent
+    HeaderLogoutComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +39,7 @@ import { HeaderLogoutComponent } from '../components/header-logout/header-logout
     TableComponent,
     SelectComponent,
     HeaderLogoutComponent,
+    NotFoundComponent,
     RouterModule,
     HttpClientModule,
     FormsModule,

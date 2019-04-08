@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'players',
     loadChildren: './modules/players/players.module#PlayersModule'
   },
+  { path: 'login', loadChildren: './modules/login/login.module#LoginModule' },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }
 ];

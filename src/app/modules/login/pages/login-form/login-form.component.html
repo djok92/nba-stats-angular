@@ -1,0 +1,36 @@
+<div class="login">
+  <app-header-logout></app-header-logout>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mx-auto">
+
+        <form class="mt-5 mb-5" [formGroup]="loginForm">
+          <h3>Login</h3>
+          <div class="form-group"
+            [ngClass]="{ error: loginForm.controls.email.errors && loginForm.controls.email.touched }">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" formControlName="email" />
+            <div class="alert alert-warning" role="alert"
+              *ngIf="loginForm.controls['email'].errors && loginForm.controls['email'].errors.email">
+              Not email format!
+            </div>
+          </div>
+
+          <div class="form-group"
+            [ngClass]="{ error: loginForm.controls.password.errors && loginForm.controls.password.touched }">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password"
+              formControlName="password" />
+            <div class="alert alert-warning" role="alert"
+              *ngIf="loginForm.controls['password'].errors && loginForm.controls['password'].errors.minlength">
+              Password must be between 6 and 20 characters!
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" (click)="checkLoginUser()">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

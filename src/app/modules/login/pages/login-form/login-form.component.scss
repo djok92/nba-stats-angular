@@ -1,0 +1,26 @@
+.form-group {
+  &.error {
+    label {
+      color: red;
+
+      &::after {
+        content: "*";
+        color: red;
+        font-size: 20px;
+      }
+    }
+
+    input {
+      border: 1px solid red;
+    }
+  }
+}
+
+.error-msg {
+  font-size: 1.6rem;
+  padding: 20px;
+  background: red;
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
