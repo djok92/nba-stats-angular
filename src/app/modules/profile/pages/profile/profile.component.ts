@@ -21,5 +21,3 @@ export class ProfileComponent implements OnInit {
   }
 
 }
-
-// ovde stao ostao profil jos da se napravi

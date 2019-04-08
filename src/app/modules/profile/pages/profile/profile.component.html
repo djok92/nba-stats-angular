@@ -1,3 +1,17 @@
-<p>
-  profile works!
-</p>
+<div class="profile">
+  <app-header></app-header>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <app-user-panel
+          [userName]="userToShow.userName"
+          [name]="userToShow.name"
+          [lastName]="userToShow.lastName"
+          [email]="userToShow.email"
+          [age]="userToShow.age"
+          [profileImage]="userToShow.image"
+        ></app-user-panel>
+      </div>
+    </div>
+  </div>
+</div>
