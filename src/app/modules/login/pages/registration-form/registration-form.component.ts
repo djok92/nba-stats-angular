@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,6 +7,9 @@ import {
 } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { ProfileService } from 'src/app/services/profile.service';
+import { User } from 'src/app/classes';
 
 @Component({
   selector: 'app-registration-form',
@@ -17,8 +20,8 @@ export class RegistrationFormComponent implements OnInit {
   registrationForm: FormGroup;
   languages: string[] = [];
   currentLang = 'rs';
-
-  @Output() emitFormValues = new EventEmitter();
+  registrationError = false;
+  users: User[] = [];
 
   // Helper functions
   get userNameControl() {
@@ -47,7 +50,9 @@ export class RegistrationFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private validationService: ValidationService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authService: AuthService,
+    private profileService: ProfileService
   ) {
     this.registrationForm = this.formBuilder.group({
       userName: [
@@ -73,11 +78,9 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit() {
     this.languages = this.translateService.langs;
     this.currentLang = this.translateService.getDefaultLang();
-  }
-
-  private sendFormValues() {
-    this.emitFormValues.emit(this.registrationForm.value);
-    console.log(this.registrationForm.value);
+    this.profileService.getUsers().subscribe((users: User[]) => {
+      this.users = users;
+    });
   }
 
   onFileChange(event) {
@@ -89,10 +92,15 @@ export class RegistrationFormComponent implements OnInit {
     reader.readAsDataURL(selectedFile);
   }
 
-  checkRegisterUser() {
+  submitRegistration() {
+    const inputEmail = this.registrationForm.controls.email.value;
     if (this.registrationForm.valid) {
-      this.sendFormValues();
-      this.registrationForm.reset();
+      this.registrationError = !this.authService.checkUserRegistration(inputEmail, this.users);
+      if (!this.registrationError) {
+        this.profileService.storeUser(this.registrationForm.value);
+      } else {
+        this.validationService.validateAllFormFields(this.registrationForm);
+      }
     } else {
       this.validationService.validateAllFormFields(this.registrationForm);
     }
