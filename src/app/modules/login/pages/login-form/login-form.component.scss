@@ -24,3 +24,14 @@
   text-align: center;
   margin-bottom: 30px;
 }
+
+.select-language-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  h5 {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+}

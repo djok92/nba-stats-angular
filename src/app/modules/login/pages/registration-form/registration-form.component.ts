@@ -6,6 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration-form',
@@ -14,6 +15,8 @@ import { ValidationService } from 'src/app/services/validation.service';
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm: FormGroup;
+  languages: string[] = [];
+  currentLang = 'rs';
 
   @Output() emitFormValues = new EventEmitter();
 
@@ -43,7 +46,8 @@ export class RegistrationFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private translateService: TranslateService
   ) {
     this.registrationForm = this.formBuilder.group({
       userName: [
@@ -62,7 +66,14 @@ export class RegistrationFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  languageSelectionChange(language: any) {
+    this.translateService.use(language.target.value);
+  }
+
+  ngOnInit() {
+    this.languages = this.translateService.langs;
+    this.currentLang = this.translateService.getDefaultLang();
+  }
 
   private sendFormValues() {
     this.emitFormValues.emit(this.registrationForm.value);

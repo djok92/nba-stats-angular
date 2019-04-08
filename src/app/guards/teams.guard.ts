@@ -8,7 +8,7 @@ import {
 import { Observable, ReplaySubject } from 'rxjs';
 import { CanActivate } from '@angular/router';
 import { TeamsService } from '../services/teams.service';
-import { Team, TeamStats } from '../classes';
+import { TeamStats } from '../classes';
 
 @Injectable({
   providedIn: 'root'

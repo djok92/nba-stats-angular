@@ -6,6 +6,7 @@ import {
   Validators
 } from '@angular/forms';
 import { ValidationService } from 'src/app/services/validation.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-form',
@@ -14,12 +15,15 @@ import { ValidationService } from 'src/app/services/validation.service';
 })
 export class LoginFormComponent implements OnInit {
   loginForm: FormGroup;
+  languages: string[] = [];
+  currentLang = 'rs';
 
   @Output() emitFormValues = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
-    private validationService: ValidationService
+    private validationService: ValidationService,
+    private translateService: TranslateService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -34,7 +38,13 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  languageSelectionChange(language: any) {
+    this.translateService.use(language.target.value);
+  }
+
   ngOnInit() {
+    this.languages = this.translateService.langs;
+    this.currentLang = this.translateService.getDefaultLang();
   }
 
   private sendFormValues() {

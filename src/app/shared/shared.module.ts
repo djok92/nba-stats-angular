@@ -15,6 +15,8 @@ import { TableComponent } from '../components/table/table.component';
 import { SelectComponent } from '../components/select/select.component';
 import { HeaderLogoutComponent } from '../components/header-logout/header-logout.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -32,7 +34,8 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule
   ],
   exports: [
     HeaderComponent,
@@ -47,7 +50,8 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslateModule
   ]
 })
-export class SharedModule {}
+export class SharedModule { }
