@@ -9,10 +9,12 @@ import { Player } from 'src/app/classes';
   styleUrls: ['./player-detail.component.scss']
 })
 export class PlayerDetailComponent implements OnInit {
-
   playerData: any;
 
-  constructor(private route: ActivatedRoute, private playersSerivce: PlayersService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private playersSerivce: PlayersService
+  ) {}
 
   ngOnInit() {
     this.showPlayer();
@@ -21,10 +23,11 @@ export class PlayerDetailComponent implements OnInit {
   showPlayer() {
     this.route.params.subscribe((params: Params) => {
       const id = params.id;
-      this.playersSerivce.getPlayerFromTeam(id).subscribe((playerData: Player) => {
-        this.playerData = playerData;
-      })
-    })
+      this.playersSerivce
+        .getPlayerFromTeam(id)
+        .subscribe((playerData: Player) => {
+          this.playerData = playerData;
+        });
+    });
   }
-
 }

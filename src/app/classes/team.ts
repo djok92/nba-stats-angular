@@ -41,7 +41,7 @@ export class Team {
       activeStreak: value.activeStreak || null,
       percentage: value.percentage || null,
       abbreviation: value.abbreviation || null,
-      stats: value.stats || null,
+      stats: value.stats || null
     });
   }
 }

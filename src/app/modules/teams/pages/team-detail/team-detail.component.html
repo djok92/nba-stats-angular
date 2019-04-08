@@ -3,25 +3,16 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12" *ngIf="teamData">
-        <app-card-team
-          [title]="teamData.name"
-          [wins]="teamData.wins"
-          [losses]="teamData.losses"
-          [pointsPerGame]="teamData.stats.pointsPerGame"
-          [reboundsPerGame]="teamData.stats.reboundsPerGame"
-          [assistsPerGame]="teamData.stats.assistsPerGame"
-          [stealsPerGame]="teamData.stats.stealsPerGame"
+        <app-card-team [title]="teamData.name" [wins]="teamData.wins" [losses]="teamData.losses"
+          [pointsPerGame]="teamData.stats.pointsPerGame" [reboundsPerGame]="teamData.stats.reboundsPerGame"
+          [assistsPerGame]="teamData.stats.assistsPerGame" [stealsPerGame]="teamData.stats.stealsPerGame"
           [turnoversPerGame]="teamData.stats.turnoversPerGame"
           [threePointersPerGame]="teamData.stats.threePointersPerGame"
           [threePointersPercentage]="teamData.stats.threePointersPercentage"
           [twoPointersPerGame]="teamData.stats.twoPointersPerGame"
-          [twoPointersPercentage]="teamData.stats.twoPointersPercentage"
-          [plusMinus]="teamData.stats.plusMinus"
-        ></app-card-team>
+          [twoPointersPercentage]="teamData.stats.twoPointersPercentage" [plusMinus]="teamData.stats.plusMinus">
+        </app-card-team>
       </div>
     </div>
   </div>
 </div>
-
-
-

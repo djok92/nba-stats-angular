@@ -11,17 +11,16 @@ import { TableColumn } from 'src/app/components/table/table.component';
   styleUrls: ['./players-list.component.scss']
 })
 export class PlayersListComponent implements OnInit {
-
   constructor(
     private teamsService: TeamsService,
     private playerService: PlayersService
-  ) { }
+  ) {}
 
   teams: Team[] = [];
   players: Player[] = [];
   selectedTeam: any = null;
   displayedColumns: TableColumn[] = [];
-  entityRoute: string = 'players';
+  entityRoute = 'players';
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -38,5 +37,4 @@ export class PlayersListComponent implements OnInit {
         this.players = players;
       });
   }
-
 }

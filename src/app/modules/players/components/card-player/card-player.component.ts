@@ -6,8 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card-player.component.scss']
 })
 export class CardPlayerComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() title: string;
   @Input() position: string;
@@ -23,7 +22,5 @@ export class CardPlayerComponent implements OnInit {
   @Input() freeThrowsPercentage: string;
   @Input() threePointersPercentage: string;
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

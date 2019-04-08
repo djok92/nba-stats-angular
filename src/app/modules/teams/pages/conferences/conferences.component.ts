@@ -14,9 +14,12 @@ export class ConferencesComponent implements OnInit {
   easternConferenceTeams: Team[] = [];
   westernConferenceTeams: Team[] = [];
   displayedColumns: TableColumn[] = [];
-  entityRoute: string = 'teams';
+  entityRoute = 'teams';
 
-  constructor(private teamsService: TeamsService, private route: ActivatedRoute) {}
+  constructor(
+    private teamsService: TeamsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -30,7 +33,7 @@ export class ConferencesComponent implements OnInit {
       );
     });
     this.displayedColumns = this.teamsService.getTableColumns();
-  } 
+  }
 
   private sortByConference(arr: Team[], condition: string): Team[] {
     return arr.filter((item: Team) => item.conference === condition);

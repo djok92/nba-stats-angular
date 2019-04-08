@@ -13,7 +13,7 @@ export class TeamsComponent implements OnInit {
 
   teams: Team[] = [];
   displayedColumns: TableColumn[] = [];
-  entityRoute: string = 'teams';
+  entityRoute = 'teams';
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {

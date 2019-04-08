@@ -6,8 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./card-team.component.scss']
 })
 export class CardTeamComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Input() title: string;
   @Input() wins: string;
@@ -23,7 +22,5 @@ export class CardTeamComponent implements OnInit {
   @Input() twoPointersPercentage: string;
   @Input() plusMinus: number;
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

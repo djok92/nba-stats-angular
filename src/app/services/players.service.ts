@@ -85,15 +85,20 @@ export class PlayersService {
       season: 2019
     };
 
-    const url = `https://api.fantasydata.net/v3/nba/stats/${apiParams.responseType}/PlayerSeasonStatsByPlayer/${apiParams.season}/${apiParams.selectedPlayer}`
+    const url = `https://api.fantasydata.net/v3/nba/stats/${
+      apiParams.responseType
+    }/PlayerSeasonStatsByPlayer/${apiParams.season}/${
+      apiParams.selectedPlayer
+    }`;
     this.http
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
           const player = this.mapPlayerStats(response);
-          return player
+          return player;
         })
-      ).subscribe((player: Player) => {
+      )
+      .subscribe((player: Player) => {
         this._player$.next(player);
       });
     return this._player$.asObservable();
@@ -136,7 +141,7 @@ export class PlayersService {
         freeThrowsPercentage: `${item.FreeThrowsPercentage} %`,
         threePointersPercentage: `${item.ThreePointersPercentage} %,`
       }
-    })
+    });
   }
 
   private setPlayers(players: Player[]) {

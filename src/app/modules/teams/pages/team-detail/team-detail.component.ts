@@ -9,10 +9,12 @@ import { Team } from 'src/app/classes';
   styleUrls: ['./team-detail.component.scss']
 })
 export class TeamDetailComponent implements OnInit {
-
   teamData: any;
 
-  constructor(private route: ActivatedRoute, private teamsService: TeamsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private teamsService: TeamsService
+  ) {}
 
   ngOnInit() {
     this.showTeam();
@@ -23,7 +25,7 @@ export class TeamDetailComponent implements OnInit {
       const id = params.id;
       this.teamsService.getTeam(id).subscribe((team: Team) => {
         this.teamData = team;
-      }); 
-    })
-  } 
+      });
+    });
+  }
 }

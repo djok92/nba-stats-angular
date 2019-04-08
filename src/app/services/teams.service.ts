@@ -15,7 +15,7 @@ export class TeamsService {
   private _teams$: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
   private _team$: BehaviorSubject<Team> = new BehaviorSubject<Team>(null);
 
-  TableColumns: TableColumn[] = [
+  tableColumns: TableColumn[] = [
     {
       key: 'name',
       title: 'Name'
@@ -50,6 +50,13 @@ export class TeamsService {
     }
   ];
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'aplication/json',
+      'Ocp-Apim-Subscription-Key': env.fantasyDataApiKey
+    })
+  };
+
   getTeams(): Observable<Team[]> {
     const apiParams = {
       responseType: 'JSON',
@@ -62,8 +69,9 @@ export class TeamsService {
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          const teams = response.map(this.mapTeam)
-                                .sort((a , b) => b.wins - a.wins );
+          const teams = response
+            .map(this.mapTeam)
+            .sort((a, b) => b.wins - a.wins);
           return teams;
         })
       )
@@ -79,30 +87,28 @@ export class TeamsService {
       selectedTeam: id,
       season: 2019
     };
-    const url = `https://api.fantasydata.net/v3/nba/stats/${apiParams.responseType}/TeamSeasonStats/${apiParams.season}`;
-    this.http.get(url, this.httpOptions)
+    const url = `https://api.fantasydata.net/v3/nba/stats/${
+      apiParams.responseType
+    }/TeamSeasonStats/${apiParams.season}`;
+    this.http
+      .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          const team = response.filter((item: any) => item.Team === id).map(this.mapTeamStats);
-          return team[0]
+          const team = response
+            .filter((item: any) => item.Team === id)
+            .map(this.mapTeamStats);
+          return team[0];
         })
       )
       .subscribe((team: Team) => {
         this._team$.next(team);
-      })
+      });
     return this._team$.asObservable();
   }
 
   getTableColumns(): TableColumn[] {
-    return this.TableColumns;
+    return this.tableColumns;
   }
-
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'aplication/json',
-      'Ocp-Apim-Subscription-Key': env.fantasyDataApiKey
-    })
-  };
 
   private mapTeam(item: any): Team {
     return new Team({
@@ -140,12 +146,11 @@ export class TeamsService {
         stealsPerGame: (item.Steals / item.Games).toFixed(1),
         turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
         threePointersPerGame: (item.ThreePointersMade / item.Games).toFixed(1),
-        threePointersPercentage: item.ThreePointersPercentage + " %",
+        threePointersPercentage: item.ThreePointersPercentage + ' %',
         twoPointersPerGame: (item.TwoPointersMade / item.Games).toFixed(1),
-        twoPointersPercentage: item.TwoPointersPercentage + " %",
+        twoPointersPercentage: item.TwoPointersPercentage + ' %',
         plusMinus: item.PlusMinus
       }
-    })
+    });
   }
-
 }

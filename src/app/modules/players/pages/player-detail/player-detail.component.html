@@ -3,21 +3,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12" *ngIf="playerData">
-        <app-card-player
-          [title]="playerData.name"
-          [position]="playerData.position"
-          [gamesPlayed]="playerData.stats.gamesPlayed"
-          [gamesStarted]="playerData.stats.gamesStarted"
-          [pointsPerGame]="playerData.stats.pointsPerGame"
-          [assistsPerGame]="playerData.stats.assistsPerGame"
-          [reboundsPerGame]="playerData.stats.reboundsPerGame"
-          [stealsPerGame]="playerData.stats.stealsPerGame"
-          [blocksPerGame]="playerData.stats.blocksPerGame"
-          [turnoversPerGame]="playerData.stats.turnoversPerGame"
+        <app-card-player [title]="playerData.name" [position]="playerData.position"
+          [gamesPlayed]="playerData.stats.gamesPlayed" [gamesStarted]="playerData.stats.gamesStarted"
+          [pointsPerGame]="playerData.stats.pointsPerGame" [assistsPerGame]="playerData.stats.assistsPerGame"
+          [reboundsPerGame]="playerData.stats.reboundsPerGame" [stealsPerGame]="playerData.stats.stealsPerGame"
+          [blocksPerGame]="playerData.stats.blocksPerGame" [turnoversPerGame]="playerData.stats.turnoversPerGame"
           [fieldGoalsPercentage]="playerData.stats.fieldGoalsPercentage"
           [freeThrowsPercentage]="playerData.stats.freeThrowsPercentage"
-          [threePointersPercentage]="playerData.stats.threePointersPercentage"
-        ></app-card-player>
+          [threePointersPercentage]="playerData.stats.threePointersPercentage"></app-card-player>
       </div>
     </div>
   </div>

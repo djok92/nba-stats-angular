@@ -20,7 +20,7 @@ export class DivisionsComponent implements OnInit {
   southWestDivisionTeams: Team[] = [];
 
   displayedColumns: TableColumn[] = [];
-  entityRoute: string = 'teams';
+  entityRoute = 'teams';
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
