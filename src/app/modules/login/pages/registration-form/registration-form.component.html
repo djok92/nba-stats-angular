@@ -2,8 +2,67 @@
   <app-header-logout></app-header-logout>
   <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-        <p>hello registration form</p>
+      <div class="col-lg-6 mx-auto">
+        <form class="registration mt-5" [formGroup]="registrationForm">
+
+          <h3>Registration</h3>
+
+          <div class="form-group" [ngClass]="{'error': userNameControl.errors && userNameControl.touched}">
+            <label for="userName">Username</label>
+            <input type="text" class="form-control" id="userName" placeholder="Enter Username"
+              formControlName="userName">
+          </div>
+          <div class="alert alert-warning" role="alert"
+            *ngIf="userNameControl.errors && userNameControl.errors['minlength']">
+            "Username length must be between 3-20 characters."
+          </div>
+
+          <div class="form-group" [ngClass]="{'error': nameControl.errors && nameControl.touched}">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter Name" formControlName="name">
+          </div>
+
+          <div class="form-group" [ngClass]="{'error': lastNameControl.errors && lastNameControl.touched}">
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name"
+              formControlName="lastName">
+          </div>
+
+          <div class="form-group" [ngClass]="{'error': emailControl.errors && emailControl.touched}">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
+              formControlName="email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="alert alert-warning" role="alert" *ngIf="emailControl.errors && emailControl.errors['email']">
+            "Not email format"
+          </div>
+
+          <div class="form-group" [ngClass]="{'error': passwordControl.errors && passwordControl.touched}">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+          </div>
+          <div class="alert alert-warning" role="alert"
+            *ngIf="passwordControl.errors && passwordControl.errors['minlength']">
+            Password must be between 6 and 20 characters.
+          </div>
+
+          <div class="form-group" [ngClass]="{'error': ageControl.errors && ageControl.touched}">
+            <label for="age">Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Age" formControlName="age">
+          </div>
+          <div class="alert alert-warning" role="alert" *ngIf="ageControl.errors && ageControl.errors['min']">
+            Minimum age must be 10!
+          </div>
+
+          <div class="form-group">
+            <label for="image">Upload profile photo</label>
+            <input class="d-block" type="file" id="image" accept="image/png, image/jpeg"
+              (change)="onFileChange($event)">
+          </div>
+
+          <button type="submit" class="btn btn-primary" (click)="checkRegisterUser()">Submit</button>
+        </form>
       </div>
     </div>
   </div>
