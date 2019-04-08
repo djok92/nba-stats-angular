@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
 import { Team, Player } from '../classes';
-import { pipe, BehaviorSubject, Observable } from 'rxjs';
+import { pipe, BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableColumn } from '../components/table/table.component';
 
@@ -15,7 +15,6 @@ export class PlayersService {
   private _players$: BehaviorSubject<Player[]> = new BehaviorSubject<Player[]>(
     []
   );
-  private _player$: BehaviorSubject<Player> = new BehaviorSubject<Player>(null);
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -79,6 +78,8 @@ export class PlayersService {
   }
 
   getPlayerFromTeam(id): Observable<Player> {
+    const player$: ReplaySubject<Player> = new ReplaySubject<Player>(1);
+
     const apiParams = {
       responseType: 'JSON',
       selectedPlayer: id,
@@ -98,10 +99,15 @@ export class PlayersService {
           return player;
         })
       )
-      .subscribe((player: Player) => {
-        this._player$.next(player);
-      });
-    return this._player$.asObservable();
+      .subscribe(
+        (player: Player) => {
+          player$.next(player);
+        },
+        error => {
+          player$.next(null);
+        }
+      );
+    return player$.asObservable();
   }
 
   getColumns(): TableColumn[] {
@@ -139,7 +145,7 @@ export class PlayersService {
         turnoversPerGame: (item.Turnovers / item.Games).toFixed(1),
         fieldGoalsPercentage: `${item.FieldGoalsPercentage} %`,
         freeThrowsPercentage: `${item.FreeThrowsPercentage} %`,
-        threePointersPercentage: `${item.ThreePointersPercentage} %,`
+        threePointersPercentage: `${item.ThreePointersPercentage} %`
       }
     });
   }

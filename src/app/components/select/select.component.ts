@@ -25,7 +25,7 @@ export class SelectComponent implements OnInit {
 
   ngOnInit() {}
 
-  sendFormValues() {
+  sendSelectValues() {
     // emit select value
     this.emitSelectValue.emit(this.selectForm.value);
   }

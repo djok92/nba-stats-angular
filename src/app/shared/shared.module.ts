@@ -13,8 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from '../components/header/header.component';
 import { TableComponent } from '../components/table/table.component';
 import { SelectComponent } from '../components/select/select.component';
+import { HeaderLogoutComponent } from '../components/header-logout/header-logout.component';
 @NgModule({
-  declarations: [HeaderComponent, TableComponent, SelectComponent],
+  declarations: [
+    HeaderComponent,
+    TableComponent,
+    SelectComponent,
+    HeaderLogoutComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -30,6 +36,7 @@ import { SelectComponent } from '../components/select/select.component';
     HeaderComponent,
     TableComponent,
     SelectComponent,
+    HeaderLogoutComponent,
     RouterModule,
     HttpClientModule,
     FormsModule,

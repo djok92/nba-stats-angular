@@ -1,11 +1,10 @@
 <div class="form-holder">
   <mat-form-field [formGroup]="selectForm">
     <mat-label>Select a team</mat-label>
-    <mat-select formControlName="team">
+    <mat-select formControlName="team" (selectionChange)="sendSelectValues()">
       <mat-option *ngFor="let team of teams" [value]="team.abbreviation">
         {{ team.abbreviation }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="primary" (click)="sendFormValues()">Submit</button>
 </div>

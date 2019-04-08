@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment as env } from 'src/environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Team } from '../classes/team';
 import { TableColumn } from '../components/table/table.component';
@@ -13,7 +13,6 @@ export class TeamsService {
   constructor(private http: HttpClient) {}
 
   private _teams$: BehaviorSubject<Team[]> = new BehaviorSubject<Team[]>([]);
-  private _team$: BehaviorSubject<Team> = new BehaviorSubject<Team>(null);
 
   tableColumns: TableColumn[] = [
     {
@@ -82,6 +81,8 @@ export class TeamsService {
   }
 
   getTeam(id): Observable<Team> {
+    const team$: ReplaySubject<Team> = new ReplaySubject<Team>(1);
+
     const apiParams = {
       responseType: 'JSON',
       selectedTeam: id,
@@ -95,15 +96,20 @@ export class TeamsService {
       .pipe(
         map((response: any) => {
           const team = response
-            .filter((item: any) => item.Team === id)
-            .map(this.mapTeamStats);
-          return team[0];
+            .map(this.mapTeamStats)
+            .find((item: any) => item.id === id);
+          return team;
         })
       )
-      .subscribe((team: Team) => {
-        this._team$.next(team);
-      });
-    return this._team$.asObservable();
+      .subscribe(
+        (team: Team) => {
+          team$.next(team);
+        },
+        error => {
+          team$.next(null);
+        }
+      );
+    return team$.asObservable();
   }
 
   getTableColumns(): TableColumn[] {
@@ -136,6 +142,7 @@ export class TeamsService {
 
   private mapTeamStats(item: any): Team {
     return new Team({
+      id: item.Team,
       name: item.Name,
       wins: item.Wins,
       losses: item.Losses,
