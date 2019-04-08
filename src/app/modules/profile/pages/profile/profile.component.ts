@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from 'src/app/services/profile.service';
+import { User } from 'src/app/classes';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  userToShow: User = null;
+
+  constructor(private profileService: ProfileService) { }
 
   ngOnInit() {
+    this.profileService.getUser().subscribe((user: User) => {
+      this.userToShow = user;
+      console.log(this.userToShow);
+    });
   }
 
 }
+
+// ovde stao ostao profil jos da se napravi

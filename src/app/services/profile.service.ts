@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 })
 export class ProfileService {
   private _users$: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
+  private _loggedUser$: ReplaySubject<User> = new ReplaySubject<User>(1);
 
   constructor() { }
 
@@ -39,8 +40,11 @@ export class ProfileService {
   }
 
   setUser(user) {
-    const loggedUser: ReplaySubject<User> = new ReplaySubject<User>(1);
-    loggedUser.next(user);
+    this._loggedUser$.next(user);
+  }
+
+  getUser(): Observable<User> {
+    return this._loggedUser$.asObservable();
   }
 
 }

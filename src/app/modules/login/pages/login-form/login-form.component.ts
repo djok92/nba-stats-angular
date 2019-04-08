@@ -10,6 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProfileService } from 'src/app/services/profile.service';
 import { User } from 'src/app/classes';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -28,7 +29,8 @@ export class LoginFormComponent implements OnInit {
     private validationService: ValidationService,
     private translateService: TranslateService,
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -62,6 +64,7 @@ export class LoginFormComponent implements OnInit {
       if (!this.loginError) {
         const loggedUser = this.users.find((user: User) => user.email === this.loginForm.controls.email.value);
         this.profileService.setUser(loggedUser);
+        this.router.navigate(['/profile']);
       } else {
         this.validationService.validateAllFormFields(this.loginForm);
       }
