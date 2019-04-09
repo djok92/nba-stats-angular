@@ -66,7 +66,6 @@ export class PlayersService {
       .get(url, this.httpOptions)
       .pipe(
         map((response: any) => {
-          console.log(response);
           const players = response.map(this.mapPlayers);
           return players;
         })
@@ -96,7 +95,6 @@ export class PlayersService {
       .pipe(
         map((response: any) => {
           const player = this.mapPlayerStats(response);
-          console.log(player);
           return player;
         })
       )

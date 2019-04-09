@@ -60,14 +60,13 @@ export class LoginFormComponent implements OnInit {
 
   submitLogin() {
     if (this.loginForm.valid) {
-      this.loginError = !this.authService.checkUserLogin(this.loginForm.controls, this.users);
-      if (!this.loginError) {
-        const loggedUser = this.users.find((user: User) => user.email === this.loginForm.controls.email.value);
-        this.profileService.setUser(loggedUser);
-        this.router.navigate(['/profile']);
-      } else {
-        this.validationService.validateAllFormFields(this.loginForm);
-      }
+      this.authService.checkUser(this.loginForm.value).subscribe((response: User | null) => {
+        if (response !== null) {
+          this.profileService.setUser(response);
+          this.router.navigate(['/profile']);
+        }
+      });
+
     } else {
       this.validationService.validateAllFormFields(this.loginForm);
     }

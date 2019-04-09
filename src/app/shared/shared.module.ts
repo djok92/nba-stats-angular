@@ -16,6 +16,7 @@ import { SelectComponent } from '../components/select/select.component';
 import { HeaderLogoutComponent } from '../components/header-logout/header-logout.component';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { NotFoundLogoutComponent } from '../components/not-found-logout/not-found-logout.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { TranslateModule } from '@ngx-translate/core';
     TableComponent,
     SelectComponent,
     HeaderLogoutComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    NotFoundLogoutComponent
   ],
   imports: [
     CommonModule,

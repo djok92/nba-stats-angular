@@ -99,7 +99,6 @@ export class TeamsService {
           const team = response
             .map(this.mapTeamStats)
             .find((item: any) => item.id === id);
-          console.log(team);
           return team;
         })
       )
