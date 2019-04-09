@@ -24,7 +24,7 @@ export class TeamsGuard implements CanActivate {
     const id = route.params.id;
 
     this.teamsService.getTeamStats(id).subscribe((team: TeamStats) => {
-      if (team !== null) {
+      if (team !== undefined) {
         canActivate$.next(true);
       } else {
         this.router.navigate(['/404']);
