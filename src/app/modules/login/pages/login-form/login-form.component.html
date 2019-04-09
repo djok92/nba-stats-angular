@@ -13,6 +13,10 @@
 
         <form class="mt-5 mb-5" [formGroup]="loginForm">
 
+          <div class="error-msg" *ngIf="loginError">
+            <h5>Invalid login</h5>
+          </div>
+
           <h3>{{ 'login.title' | translate }}</h3>
           <div class="form-group"
             [ngClass]="{ error: loginForm.controls.email.errors && loginForm.controls.email.touched }">

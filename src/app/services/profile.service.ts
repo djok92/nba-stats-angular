@@ -23,7 +23,11 @@ export class ProfileService {
     });
   }
 
-  storeUser(user) {
+  /**
+   *
+   * @param user - user to be stored
+   */
+  storeUser(user: User) {
     const newUser = this.mapUser(user);
     if (this._users$.value === null) {
       this._users$.next([newUser]);
@@ -33,16 +37,26 @@ export class ProfileService {
     localStorage.setItem('USERS', JSON.stringify(this._users$.value));
   }
 
+  /**
+   * @returns Observable<User[]> - array of registered users
+   */
   getUsers(): Observable<User[]> {
     const users = JSON.parse(localStorage.getItem('USERS'));
     this._users$.next(users);
     return this._users$.asObservable();
   }
 
+  /**
+   *
+   * @param user data for creating the new user
+   */
   setUser(user) {
     this._loggedUser$.next(user);
   }
 
+  /**
+   * @returns Observable<User> - returns logged user
+   */
   getUser(): Observable<User> {
     return this._loggedUser$.asObservable();
   }

@@ -10,7 +10,7 @@ import { Division } from 'src/app/enums';
   styleUrls: ['./divisions.component.scss']
 })
 export class DivisionsComponent implements OnInit {
-  constructor(private teamsService: TeamsService) {}
+  constructor(private teamsService: TeamsService) { }
 
   atlanticDivisionTeams: Team[] = [];
   centralDivisionTeams: Team[] = [];
@@ -47,6 +47,8 @@ export class DivisionsComponent implements OnInit {
   }
 
   /**
+   * @param arr array of teams
+   * @param condition parameter for sorting
    * @returns Team[] Return the teams array sorted by the division
    */
   private sortByDivision(teams: Team[], division: string): Team[] {

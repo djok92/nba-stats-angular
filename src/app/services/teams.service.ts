@@ -56,7 +56,9 @@ export class TeamsService {
       'Ocp-Apim-Subscription-Key': env.fantasyDataApiKey
     })
   };
-
+  /**
+   * @returns Observable<Team[]> - returns all teams based on api params
+   */
   getTeams(): Observable<Team[]> {
     const apiParams = {
       responseType: 'JSON',
@@ -81,6 +83,11 @@ export class TeamsService {
     return this._teams$.asObservable();
   }
 
+  /**
+   *
+   * @param id id of team stats we want to get from API
+   * @returns Observable<TeamStats> team stats for selected team
+   */
   getTeamStats(id): Observable<TeamStats> {
     const team$: ReplaySubject<TeamStats> = new ReplaySubject<TeamStats>(1);
 
@@ -113,10 +120,18 @@ export class TeamsService {
     return team$.asObservable();
   }
 
+  /**
+   * @returns TableColumn[] - tableColumns property
+   */
   getTableColumns(): TableColumn[] {
     return this.tableColumns;
   }
 
+  /**
+   * Helper function
+   * @param item  item from API response
+   * @returns Team - mapped team
+   */
   private mapTeam(item: any): Team {
     return new Team({
       id: item.Key,
@@ -141,6 +156,10 @@ export class TeamsService {
     });
   }
 
+  /**
+   * Helper function
+   * @param item TeamStats - mapped team stats
+   */
   private mapTeamStats(item: any): TeamStats {
     return new TeamStats({
       id: item.Team,

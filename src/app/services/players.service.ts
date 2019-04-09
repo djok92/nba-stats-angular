@@ -54,6 +54,11 @@ export class PlayersService {
     }
   ];
 
+  /**
+   *
+   * @param team string argument from select value
+   * @returns Observable<Player[]>
+   */
   getPlayersFromTeam(team: string): Observable<Player[]> {
     const apiParams = {
       responseType: 'JSON',
@@ -76,6 +81,11 @@ export class PlayersService {
     return this._players$.asObservable();
   }
 
+  /**
+   *
+   * @param id parameter for api call for single player
+   * @returns Observable<Player> - single player with provided id
+   */
   getPlayerStats(id): Observable<PlayerStats> {
     const player$: ReplaySubject<PlayerStats> = new ReplaySubject<PlayerStats>(1);
 
@@ -108,11 +118,18 @@ export class PlayersService {
       );
     return player$.asObservable();
   }
-
+  /**
+   * @return value of tableColumns property
+   */
   getColumns(): TableColumn[] {
     return this.tableColumns;
   }
 
+  /**
+   * Helper function
+   * @param item item from api call
+   * @returns Player - mapped player
+   */
   private mapPlayers(item: any): Player {
     return new Player({
       id: item.PlayerID,
@@ -129,6 +146,11 @@ export class PlayersService {
     });
   }
 
+  /**
+   * Helper Function
+   * @param item item from api call
+   * @returns PlayerStats - mapped player stats
+   */
   private mapPlayerStats(item: any): PlayerStats {
     return new PlayerStats({
       name: item.Name,

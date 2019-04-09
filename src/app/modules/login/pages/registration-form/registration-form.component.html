@@ -13,6 +13,10 @@
 
         <form class="registration mt-5" [formGroup]="registrationForm">
 
+          <div class="error-msg" *ngIf="registrationError">
+            <h5>Invalid registration</h5>
+          </div>
+
           <h3>{{ 'registration.title' | translate }}</h3>
 
           <div class="form-group" [ngClass]="{'error': userNameControl.errors && userNameControl.touched}">

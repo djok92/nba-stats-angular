@@ -16,6 +16,7 @@ export class SelectComponent implements OnInit {
   @Output()
   emitSelectValue = new EventEmitter();
 
+  // create new form
   constructor(private formBuilder: FormBuilder) {
     this.team = new FormControl();
     this.selectForm = this.formBuilder.group({
@@ -23,10 +24,10 @@ export class SelectComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+  // emit select value
   sendSelectValues() {
-    // emit select value
     this.emitSelectValue.emit(this.selectForm.value);
   }
 }

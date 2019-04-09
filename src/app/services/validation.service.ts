@@ -5,8 +5,12 @@ import { FormControl, FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class ValidationService {
-  constructor() {}
+  constructor() { }
 
+  /**
+   * Helper function
+   * @param formGroup form to be validated - checks if are all form fields valid 
+   */
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);

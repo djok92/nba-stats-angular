@@ -19,7 +19,7 @@ export class ConferencesComponent implements OnInit {
   constructor(
     private teamsService: TeamsService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.teamsService.getTeams().subscribe((teams: Team[]) => {
@@ -35,6 +35,12 @@ export class ConferencesComponent implements OnInit {
     this.displayedColumns = this.teamsService.getTableColumns();
   }
 
+  /**
+   *
+   * @param arr array of teams
+   * @param condition parameter for sorting
+   * @returns Team[] Return the teams array sorted by the conference
+   */
   private sortByConference(arr: Team[], condition: string): Team[] {
     return arr.filter((item: Team) => item.conference === condition);
   }

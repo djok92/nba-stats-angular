@@ -32,6 +32,7 @@ export class LoginFormComponent implements OnInit {
     private profileService: ProfileService,
     private router: Router
   ) {
+    // create login form
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
@@ -45,6 +46,10 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param language - language to be set
+   */
   languageSelectionChange(language: any) {
     this.translateService.use(language.target.value);
   }
@@ -57,17 +62,21 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
-
+  // actions on login form submit
   submitLogin() {
     if (this.loginForm.valid) {
       this.authService.checkUser(this.loginForm.value).subscribe((response: User | null) => {
         if (response !== null) {
+          this.loginError = false;
           this.profileService.setUser(response);
           this.router.navigate(['/profile']);
+        } else {
+          this.loginError = true;
         }
       });
 
     } else {
+      this.loginError = true;
       this.validationService.validateAllFormFields(this.loginForm);
     }
   }

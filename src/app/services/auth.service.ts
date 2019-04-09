@@ -13,6 +13,11 @@ export class AuthService {
 
   }
 
+  /**
+   *
+   * @param data data from form passed into function for checking if user exists
+   * @returns returns user if found in local storage, and null if it's not found
+   */
   checkUser(data: any): Observable<User> | Observable<null> {
     const loggedUser$: ReplaySubject<User> = new ReplaySubject<User>(1);
     const users = JSON.parse(localStorage.getItem('USERS'));
@@ -27,10 +32,18 @@ export class AuthService {
     return loggedUser$.asObservable();
   }
 
+  /**
+   * @returns returns if _loggedIn$ property is true or false
+   */
   getLoginStatus(): Observable<boolean> {
     return this._loggedIn$.asObservable();
   }
 
+  /**
+   *
+   * @param input data from registration form
+   * @param users array of registered users
+   */
   checkUserRegistration(input, users): boolean {
     if (users !== null) {
       const userEmail = users.find((user: User) => user.email === input.email);

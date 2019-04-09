@@ -28,12 +28,5 @@ export class TableComponent implements OnInit {
 
   rows: any[] = [];
 
-  ngOnInit() {}
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log(changes);
-  //   if (changes.displayedColumns) {
-  //     console.log(changes.displayedColumns.currentValue);
-  //   }
-  // }
+  ngOnInit() { }
 }

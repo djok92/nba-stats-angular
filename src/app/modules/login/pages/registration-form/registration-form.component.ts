@@ -54,6 +54,7 @@ export class RegistrationFormComponent implements OnInit {
     private authService: AuthService,
     private profileService: ProfileService
   ) {
+    // create registration form
     this.registrationForm = this.formBuilder.group({
       userName: [
         '',
@@ -71,6 +72,10 @@ export class RegistrationFormComponent implements OnInit {
     });
   }
 
+  /**
+   *
+   * @param language language to be set
+   */
   languageSelectionChange(language: any) {
     this.translateService.use(language.target.value);
   }
@@ -83,7 +88,11 @@ export class RegistrationFormComponent implements OnInit {
     });
   }
 
-  onFileChange(event) {
+  /**
+   *
+   * @param event uploaded photo
+   */
+  onFileChange(event: any) {
     const selectedFile = event.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -92,6 +101,7 @@ export class RegistrationFormComponent implements OnInit {
     reader.readAsDataURL(selectedFile);
   }
 
+  // actions on registration form submit
   submitRegistration() {
     const inputEmail = this.registrationForm.controls.email.value;
     if (this.registrationForm.valid) {
@@ -99,9 +109,11 @@ export class RegistrationFormComponent implements OnInit {
       if (!this.registrationError) {
         this.profileService.storeUser(this.registrationForm.value);
       } else {
+        this.registrationError = true;
         this.validationService.validateAllFormFields(this.registrationForm);
       }
     } else {
+      this.registrationError = true;
       this.validationService.validateAllFormFields(this.registrationForm);
     }
   }
